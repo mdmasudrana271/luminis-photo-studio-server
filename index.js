@@ -125,6 +125,12 @@ async function run(){
             const review = result.filter(item=> item.serviceId === id)
             res.send(review)
         })
+        app.get('/review-all', async(req, res)=>{
+            const query = {};
+            const cursor = reviewCollection.find(query)
+            const result = await cursor.sort({$natural: -1 }).toArray()
+            res.send(result)
+        })
 
         // get perticular review for update 
 
